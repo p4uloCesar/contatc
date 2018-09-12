@@ -1,11 +1,12 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatPaginator, MatTableDataSource} from '@angular/material';
-import {ContactService, PhoneService} from '../contact.service';
+import {AddressService, ContactService, PhoneService} from '../contact.service';
 import {ContactModel} from '../contact-model';
 import {Utils} from '../../../util/utils';
 import {ContactDialogComponent} from '../contact-dialog/contact-dialog.component';
 import {AddressModel} from '../address-model';
 import {ToastService} from '../../../service/toast.service';
+import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 @Component({
     selector: 'app-contact',
@@ -31,6 +32,7 @@ export class ContactListComponent implements OnInit, AfterViewInit {
     constructor( private toast: ToastService,
                  public service: ContactService,
                  public servicePhone: PhoneService,
+                 public serviceAddress: AddressService,
                  public dialog: MatDialog
     ){}
 
@@ -88,7 +90,9 @@ export class ContactListComponent implements OnInit, AfterViewInit {
         }
     }
 
-    public delete(element: any){
+    public delete(element: any) {
+        const phoneToDelete =  element.phone;
+        const addressToDelete =  element.address;
         this.service.delete(element.id).subscribe(
         (response) => {
             this.toast.success('Sucesso', 'Telefone excluido');
@@ -96,7 +100,30 @@ export class ContactListComponent implements OnInit, AfterViewInit {
         },
         ex => {
         });
+        this.deleteAllPhone(phoneToDelete);
+        this.deleteAddress(addressToDelete);
     }
+
+    public deleteAllPhone(element: any) {
+        this.servicePhone.delete(element).subscribe(
+            (response) => {
+                this.toast.success('Sucesso', 'Telefone excluido');
+                this.retrieveList();
+            },
+            ex => {
+            });
+    }
+
+    public deleteAddress(element: any) {
+        this.serviceAddress.delete(element).subscribe(
+            (response) => {
+                this.toast.success('Sucesso', 'Telefone excluido');
+                this.retrieveList();
+            },
+            ex => {
+            });
+    }
+
     public openCreateDialog(contact: ContactModel): void {
         const data = contact ? {id: contact.id, name: contact.name, email: contact.email, address : contact.address_obj, phone: contact.phone_obj} :
                 {name: '', email: '', address : new AddressModel(), phone: []};
