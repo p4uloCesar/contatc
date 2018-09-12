@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import {ToastService} from './service/toast.service';
 
 @Component({
     selector: 'app-root',
@@ -7,7 +8,8 @@ import { TranslateService } from '@ngx-translate/core';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-    constructor(private translate: TranslateService) {
+    constructor(private translate: TranslateService,
+                protected toast: ToastService) {
         translate.setDefaultLang('en');
     }
 }

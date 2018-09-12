@@ -4,9 +4,9 @@
 
 export const environment = {
     production: false,
-    api: '/api/',
+    api: '',
     appName: 'Contacts',
-    port: '8000',
+    port: '8000/',
 };
 
 /*
