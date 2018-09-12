@@ -1,0 +1,86 @@
+<form>
+    <div fxLayout="column">
+
+        <h1 fxFlex="100%"  mat-dialog-title>{{'Adicionar Contato'}}</h1>
+
+        <div fxLayout="column" mat-dialog-content>
+            <mat-form-field fxFlex="50%">
+                <input placeholder="{{'Nome'}}"
+                       name="name"
+                       [(ngModel)]="contact.name"
+                       required
+                       matInput tabindex="2" autocomplete="off" maxlength="40">
+            </mat-form-field>
+            <mat-form-field fxFlex="50%">
+                <input placeholder="{{'Email'}}"
+                       name="Email"
+                       [(ngModel)]="contact.email"
+                       required
+                       matInput tabindex="2" autocomplete="off" maxlength="40">
+            </mat-form-field>
+            <mat-form-field fxFlex="50%">
+                <input placeholder="{{'Endereço'}}"
+                       name="endereco"
+                       [(ngModel)]="contact.address.street"
+                       required
+                       matInput tabindex="2" autocomplete="off" maxlength="40">
+            </mat-form-field>
+            <div fxLayout="row" mat-dialog-content>
+                <mat-form-field fxFlex="1 1 35%" fxLayout="column">
+                    <input placeholder="{{'Estado'}}"
+                           name="estado"
+                           [(ngModel)]="contact.address.state"
+                           required
+                           matInput tabindex="2" autocomplete="off" maxlength="40">
+                </mat-form-field>
+                <mat-form-field fxFlex="1 1 35%" fxLayout="column">
+                    <input placeholder="{{'Cidade'}}"
+                           name="Cidade"
+                           [(ngModel)]="contact.address.city"
+                           required
+                           matInput tabindex="2" autocomplete="off" maxlength="40">
+                </mat-form-field>
+                    <mat-form-field fxFlex="1 1 30%" fxLayout="column">
+                    <input placeholder="{{'País'}}"
+                           name="País"
+                           [(ngModel)]="contact.address.country"
+                           required
+                           matInput tabindex="2" autocomplete="off" maxlength="40">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" mat-dialog-content>
+                <mat-form-field fxFlex="1 1 45%" fxLayout="column">
+                    <input placeholder="{{'Telefone'}}"
+                           name="telefone"
+                           [(ngModel)]="numberVal"
+                           required
+                           type="number"
+                           matInput tabindex="2" autocomplete="off" maxlength="40">
+                </mat-form-field>
+                <mat-form-field fxFlex="1 1 45%" fxLayout="column">
+                    <mat-select placeholder="Tipo" [(ngModel)]="typeVal" name="typePhone">
+                        <mat-option *ngFor="let type of typePhone" [value]="type.value">
+                            {{type.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button class="material-icons button-add" mat-raised-button color="primary" (click)="add($event)">add</button>
+            </div>
+            <mat-form-field class="example-chip-list">
+                <mat-chip-list #chipList>
+                    <mat-chip *ngFor="let tel of contact.phone" [selectable]="selectable"
+                              [removable]="removable" (removed)="remove(tel)">
+                        {{tel.number}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                    <!--<input [matChipInputFor]="chipList">-->
+                </mat-chip-list>
+            </mat-form-field>
+        </div>
+
+        <div fxFlex="100%" fxLayout="row-reverse" mat-dialog-actions>
+            <button fxFlex="15%" (click)="save()" mat-button tabindex="3">Salvar</button>
+            <button fxFlex="15%" (click)="closeDialog()" mat-button tabindex="3">Fechar</button>
+        </div>
+    </div>
+</form>

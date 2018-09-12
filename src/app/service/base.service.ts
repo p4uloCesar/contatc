@@ -41,6 +41,13 @@ export class BaseService<T> {
     this.parameters.set(key, value);
   }
 
+    public getPaginated(): Observable<PaginatedResult<T>> {
+        return this.http.get(this.fullUrl, this.addOptions(this.parameters)).map(
+            response => response.json()
+        ).catch(
+            ex => Observable.throw(ex)
+        );
+    }
   protected addOptions(parameters?: URLSearchParams): RequestOptions {
     const options = new RequestOptions();
 

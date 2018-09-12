@@ -2,7 +2,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { NgModule } from '@angular/core';
 import {
-    MatButtonModule,
+    MatButtonModule, MatDialogModule,
     MatIconModule,
     MatListModule,
     MatSidenavModule,
@@ -16,7 +16,10 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// AoT requires an exported function for factories
+import {HttpInterceptor} from './service/http-interceptor';
+import {Http, HttpModule} from '@angular/http';
+import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifications';
+import {ToastService} from './service/toast.service';
 export const createTranslateLoader = (http: HttpClient) => {
     // for development
     /*return new TranslateHttpLoader(
@@ -33,9 +36,14 @@ export const createTranslateLoader = (http: HttpClient) => {
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
+        BrowserModule,
         LayoutModule,
         OverlayModule,
+        LayoutModule,
         HttpClientModule,
+        MatDialogModule,
+        HttpModule,
+        SimpleNotificationsModule.forRoot(),
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -44,7 +52,7 @@ export const createTranslateLoader = (http: HttpClient) => {
             }
         })
     ],
-    providers: [],
+    providers: [HttpInterceptor, ToastService],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

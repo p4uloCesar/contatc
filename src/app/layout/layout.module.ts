@@ -15,6 +15,8 @@ import { TopnavComponent } from './components/topnav/topnav.component';
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 import { NavComponent } from './nav/nav.component';
+import {ContactModule} from './contact/contact.module';
+import {NotificationsService, SimpleNotificationsModule} from 'angular2-notifications';
 
 @NgModule({
     imports: [
@@ -25,10 +27,11 @@ import { NavComponent } from './nav/nav.component';
         MatSidenavModule,
         MatIconModule,
         MatInputModule,
-        MatMenuModule,
         MatListModule,
-        TranslateModule
+        TranslateModule,
+        ContactModule,
     ],
-    declarations: [LayoutComponent, NavComponent, TopnavComponent, SidebarComponent]
+    declarations: [LayoutComponent, NavComponent, TopnavComponent, SidebarComponent, ],
+    providers: [NotificationsService]
 })
 export class LayoutModule {}
