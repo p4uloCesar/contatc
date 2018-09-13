@@ -46,7 +46,7 @@ export class ContactListComponent implements OnInit, AfterViewInit {
     ngAfterViewInit(){}
 
     public addValuesCards() {
-        this.list_type[4] = 0;
+        this.list();
         this.servicePhone.getTypePhone().subscribe(
             response => {
                 this.phoneList = response;
@@ -58,6 +58,13 @@ export class ContactListComponent implements OnInit, AfterViewInit {
             ex => {
             }
         );
+    }
+
+    public list() {
+        this.list_type[1] = 0;
+        this.list_type[2] = 0;
+        this.list_type[3] = 0;
+        this.list_type[4] = 0;
     }
 
     public retrieveList(): void {
@@ -105,10 +112,9 @@ export class ContactListComponent implements OnInit, AfterViewInit {
     }
 
     public deleteAllPhone(element: any) {
-        this.servicePhone.delete(element).subscribe(
+        this.servicePhone.deleteAll(element).subscribe(
             (response) => {
                 this.toast.success('Sucesso', 'Telefone excluido');
-                this.retrieveList();
             },
             ex => {
             });
@@ -117,7 +123,6 @@ export class ContactListComponent implements OnInit, AfterViewInit {
     public deleteAddress(element: any) {
         this.serviceAddress.delete(element).subscribe(
             (response) => {
-                this.toast.success('Sucesso', 'Telefone excluido');
                 this.retrieveList();
             },
             ex => {

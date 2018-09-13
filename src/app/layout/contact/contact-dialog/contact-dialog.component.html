@@ -15,14 +15,12 @@
                 <input placeholder="{{'Email'}}"
                        name="Email"
                        [(ngModel)]="contact.email"
-                       required
                        matInput tabindex="2" autocomplete="off" maxlength="40">
             </mat-form-field>
             <mat-form-field fxFlex="50%">
                 <input placeholder="{{'Endereço'}}"
                        name="endereco"
                        [(ngModel)]="contact.address.street"
-                       required
                        matInput tabindex="2" autocomplete="off" maxlength="40">
             </mat-form-field>
             <div fxLayout="row" mat-dialog-content>
@@ -30,21 +28,18 @@
                     <input placeholder="{{'Estado'}}"
                            name="estado"
                            [(ngModel)]="contact.address.state"
-                           required
                            matInput tabindex="2" autocomplete="off" maxlength="40">
                 </mat-form-field>
                 <mat-form-field fxFlex="1 1 35%" fxLayout="column">
                     <input placeholder="{{'Cidade'}}"
                            name="Cidade"
                            [(ngModel)]="contact.address.city"
-                           required
                            matInput tabindex="2" autocomplete="off" maxlength="40">
                 </mat-form-field>
                     <mat-form-field fxFlex="1 1 30%" fxLayout="column">
                     <input placeholder="{{'País'}}"
                            name="País"
                            [(ngModel)]="contact.address.country"
-                           required
                            matInput tabindex="2" autocomplete="off" maxlength="40">
                 </mat-form-field>
             </div>

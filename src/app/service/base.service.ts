@@ -102,8 +102,19 @@ export class BaseService<T> {
       ex => Observable.throw(ex)
     );
   }
+    public deleteAll(id: number[]): any {
+        this.clearParameter();
+        return this.http.post(this.fullUrl + 'destroy_all/', id, this.addOptions(this.parameters)).map(
+            response => {
+                return response.json();
+            }
+        ).catch(
+            ex => Observable.throw(ex)
+        );
+    }
 
-  public update(id: number, body: any): Observable<T> {
+
+    public update(id: number, body: any): Observable<T> {
     this.clearParameter();
     return this.http.patch(this.fullUrl.concat(String(id) + '/'), body, this.addOptions(this.parameters)).map(
       response => response.json() as T
